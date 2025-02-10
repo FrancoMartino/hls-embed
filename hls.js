@@ -46,18 +46,6 @@
       player.qualityLevels();
     });
 
-    let wasPaused = false;
-    player.on("pause", () => {
-      wasPaused = true;
-    });
-
-    player.on("play", () => {
-      if (wasPaused && player.liveTracker && player.liveTracker.seekableEnd()) {
-        player.currentTime(player.liveTracker.seekableEnd());
-      }
-      wasPaused = false;
-    });
-
     player.on("loadeddata", () => {
       const qualityLevels = player.qualityLevels();
       qualityLevels.on("change", () => {

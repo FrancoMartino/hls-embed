@@ -1,35 +1,113 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="bg-gray-100 min-h-screen">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-      }
-      iframe {
-        width: 50vw;
-        height: 50vh;
-        border: none;
-      }
-    </style>
+    <title>HLS Embed Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@iconify/iconify@3.1.0/dist/iconify.min.js"></script>
   </head>
-  <body>
-    <iframe
-      src="https://francomartino.github.io/hls-embed/?url=https://live-01-01-tn.vodgc.net/TN24/index.m3u8&autoplay=true"
-    ></iframe>
-    <iframe
-      src="https://francomartino.github.io/hls-embed/?url=https://unlimited1-us.dps.live/nettv/nettv.smil/playlist.m3u8&autoplay=true"
-    ></iframe>
-    <iframe
-      src="https://francomartino.github.io/hls-embed/?url=https://live-01-01-tn.vodgc.net/TN24/index.m3u8&autoplay=true"
-    ></iframe>
-    <iframe
-      src="https://francomartino.github.io/hls-embed/?url=https://unlimited1-us.dps.live/nettv/nettv.smil/playlist.m3u8&autoplay=true"
-    ></iframe>
+
+  <body class="p-4 md:p-8 font-sans">
+    <div
+      class="max-w-5xl mx-auto bg-white rounded-xl shadow-2xl overflow-hidden"
+    >
+      <div class="bg-gradient-to-r from-[#de2c76] to-[#a81c5a] p-6 md:p-8">
+        <h1 class="text-3xl md:text-4xl font-extrabold text-white mb-2">
+          HLS Embed Demo
+        </h1>
+        <p class="text-[#f0c2d2] text-lg">
+          Demonstration of how to embed an HLS player using an iframe.
+        </p>
+      </div>
+
+      <div class="p-6 md:p-8 space-y-8">
+        <div class="bg-gray-50 p-6 rounded-lg shadow-inner">
+          <h2 class="text-2xl font-bold text-gray-800 mb-4">HLS Player</h2>
+          <div class="aspect-video">
+            <iframe
+              src="https://francomartino.github.io/hls-embed/?url=https://vz-cea98c59-23c.b-cdn.net/c309129c-27b6-4e43-8254-62a15c77c5ee/1280x720/video.m3u8&autoplay=true"
+              class="w-full h-full rounded-lg shadow-md"
+              allowfullscreen
+            >
+            </iframe>
+          </div>
+        </div>
+
+        <div class="space-y-6">
+          <h2 class="text-2xl font-bold text-gray-800">Example Code</h2>
+          <div class="w-full relative">
+            <pre
+              class="bg-gray-700 text-blue-300 p-4 rounded-lg text-sm md:text-base overflow-x-auto overflow-y-hidden relative flex items-center max-h-[5rem]"
+              id="code-to-copy"
+            >
+                        <code class="break-words">
+&lt;iframe src="https://francomartino.github.io/hls-embed/?url=URL_OF_HLS_FILE&autoplay=true" allowfullscreen&gt;&lt;/iframe&gt;
+                        </code>
+                    </pre>
+            <button
+              title="Copy"
+              class="absolute top-2 right-2 p-2 px-3 rounded-md bg-gray-500 hover:bg-gray-600 text-white text-sm"
+              onclick="copyCode()"
+              id="copyButton"
+            >
+              <span class="iconify" data-icon="mdi:content-copy"></span>
+            </button>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-semibold text-gray-800 mb-3">
+              How to Use It
+            </h3>
+            <p class="text-gray-600 leading-relaxed">
+              Simply replace
+              <code class="bg-gray-200 text-[#de2c76] px-2 py-1 rounded"
+                >URL_OF_HLS_FILE</code
+              >
+              with the URL of your HLS file.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-semibold text-gray-800 mb-3">Parameters</h3>
+            <ul class="space-y-2 text-gray-600 list-disc pl-6">
+              <li>
+                <strong class="font-semibold">url</strong>: The URL of the HLS
+                file (.m3u8) you want to play.
+              </li>
+              <li>
+                <strong class="font-semibold">autoplay</strong>: If set to
+                "true", the video will start playing automatically.
+              </li>
+              <li>
+                <strong class="font-semibold">muted</strong>: If set to "true",
+                the video will start muted.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      function copyCode() {
+        const codeToCopy = document.getElementById("code-to-copy");
+        const codeText = codeToCopy.innerText;
+
+        navigator.clipboard
+          .writeText(codeText)
+          .then(() => {
+            const button = document.getElementById("copyButton");
+            button.innerHTML =
+              '<span class="iconify" data-icon="mdi:check-bold"></span>';
+            setTimeout(() => {
+              button.innerHTML =
+                '<span class="iconify" data-icon="mdi:content-copy"></span>';
+            }, 2000);
+          })
+          .catch((err) => {
+            console.error("Failed to copy: ", err);
+          });
+      }
+    </script>
   </body>
 </html>
